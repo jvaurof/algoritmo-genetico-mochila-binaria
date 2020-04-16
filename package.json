@@ -1,0 +1,8 @@
+{
+  "name": "mochila",
+  "version": "1",
+  "description": "algoritmo genético aplicado ao caso da mochila binária",
+  "main": "index.js",
+  "author": "jvaurof",
+  "license": "MIT"
+}
