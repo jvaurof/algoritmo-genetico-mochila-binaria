@@ -4,10 +4,6 @@ function Populacao() {
   let tamanho
   let individuos = []
 
-  /*   function getTamanho() {
-      return tamanho
-    } */
-
   this.getIndividuos = function () {
     return individuos
   }
@@ -26,29 +22,24 @@ function Populacao() {
   }
 
   this.calcularFitness = function (mochilaItens) {
+    /*calcular fitness*/
     individuos.forEach(individuo => {
       individuo.getCromossomo().forEach((gene, index) => {
         if (gene == 1)
           individuo.setFitness(mochilaItens[index].getPeso() + individuo.getFitness())
       })
     })
-  }
 
-  this.rankearFitness = function () {
+    /*rankerar fitness*/
     individuos.sort((a, b) => {
       return b.getFitness() - a.getFitness()
     })
-  }
 
-  this.definirId = function () {
+    /*definir id*/
     individuos.forEach((individuo, index) => {
       individuo.setId(index)
     })
   }
-
-  /*  function adicionarIndividuos(individuo) {
-     individuos.push(individuo)
-   } */
 }
 
 module.exports = Populacao
