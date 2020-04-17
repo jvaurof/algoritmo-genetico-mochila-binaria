@@ -22,6 +22,13 @@ function Individuo() {
   this.setFitness = function (f) {
     fitness = f
   }
+
+  this.inverterGene = function (gene) {
+    if (cromossomo[gene] == 0)
+      cromossomo[gene] = 1
+    else
+      cromossomo[gene] = 0
+  }
 }
 
 module.exports = Individuo

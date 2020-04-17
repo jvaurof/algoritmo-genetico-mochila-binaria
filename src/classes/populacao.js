@@ -16,7 +16,7 @@ function Populacao() {
     tamanho = t
   }
 
-  this.iniciar = function (quantidadeItens) {
+  this.iniciarPopulacao = function (quantidadeItens) {
     for (let j = 0; j < tamanho; j++) {
       const individuo = new Individuo()
 
@@ -28,6 +28,8 @@ function Populacao() {
   this.calcularFitness = function (mochilaItens) {
     /*calcular fitness*/
     individuos.forEach(individuo => {
+      individuo.setFitness(0)
+
       individuo.getCromossomo().forEach((gene, index) => {
         if (gene == 1)
           individuo.setFitness(mochilaItens[index].getPeso() + individuo.getFitness())
@@ -48,6 +50,19 @@ function Populacao() {
     individuo = new Individuo()
     individuo.setCromossomo(filho2)
     individuos.push(individuo)
+  }
+
+  this.ajustarPopulacao = function () {
+    individuos.splice(tamanho)
+  }
+
+  this.exibirPopoulacao = function () {
+    let p = []
+    individuos.forEach((individuo, index) => {
+      //p[index] = individuo.getCromossomo()
+      p[index] = individuo.getFitness()
+    })
+    console.table(p)
   }
 }
 
