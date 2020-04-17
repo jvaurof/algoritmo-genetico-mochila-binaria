@@ -4,8 +4,12 @@ function Populacao() {
   let tamanho
   let individuos = []
 
+  this.getTamanho = function () {
+    return tamanho
+  }
+
   this.getIndividuos = function () {
-    return individuos
+    return individuos.slice()
   }
 
   this.setTamanho = function (t) {
@@ -16,7 +20,7 @@ function Populacao() {
     for (let j = 0; j < tamanho; j++) {
       const individuo = new Individuo()
 
-      individuo.setCromossomo(quantidadeItens)
+      individuo.setCromossomoIncial(quantidadeItens)
       individuos.push(individuo)
     }
   }
@@ -34,11 +38,16 @@ function Populacao() {
     individuos.sort((a, b) => {
       return b.getFitness() - a.getFitness()
     })
+  }
 
-    /*definir id*/
-    individuos.forEach((individuo, index) => {
-      individuo.setId(index)
-    })
+  this.adicionarFilhos = function (filho1, filho2) {
+    let individuo = new Individuo()
+    individuo.setCromossomo(filho1)
+    individuos.push(individuo)
+
+    individuo = new Individuo()
+    individuo.setCromossomo(filho2)
+    individuos.push(individuo)
   }
 }
 
