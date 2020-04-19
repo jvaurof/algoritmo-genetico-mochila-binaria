@@ -3,6 +3,7 @@ const Individuo = require('./individuo.js')
 function Populacao() {
   let tamanho
   let individuos = []
+  let geracao = 0
 
   this.getTamanho = function () {
     return tamanho
@@ -13,7 +14,16 @@ function Populacao() {
   }
 
   this.setTamanho = function (t) {
-    tamanho = t
+    if (t <= 0) {
+      console.log('O tamanho da população deve ser maior que 0.')
+      process.exit(1)
+    }
+
+    tamanho = t % 2 == 0 ? t : ++t
+  }
+
+  this.setGeracao = function () {
+    geracao++
   }
 
   this.iniciarPopulacao = function (quantidadeItens) {
@@ -52,17 +62,33 @@ function Populacao() {
     individuos.push(individuo)
   }
 
-  this.ajustarPopulacao = function () {
-    individuos.splice(tamanho)
+  this.ajustarPopulacao = function (limitePeso) {
+
+    taxaCorte = limitePeso * 1.20
+
+    i = individuos.filter((individuo) => {
+      return individuo.getFitness() <= taxaCorte
+    })
+    console.log(i.length)
+    if (i.length > tamanho) {
+      i.splice(tamanho)
+      individuos = i
+    }
+    //individuos.splice(tamanho)
   }
 
   this.exibirPopoulacao = function () {
-    let p = []
+    let cromossomo = []
+    let fitness = []
+
     individuos.forEach((individuo, index) => {
-      //p[index] = individuo.getCromossomo()
-      p[index] = individuo.getFitness()
+      cromossomo[index] = individuo.getCromossomo()
+      fitness[index] = individuo.getFitness()
     })
-    console.table(p)
+    console.table(cromossomo)
+    console.table(fitness)
+    console.log('geração: ', geracao)
+    console.log(' ')
   }
 }
 

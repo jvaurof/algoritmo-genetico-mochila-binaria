@@ -30,14 +30,14 @@ function Reproducao() {
       sorteio = Math.floor(Math.random() * (quantidadeItens - 1))
       sorteio++
 
-      const selecionado1 = selecionados[i].getCromossomo()
-      const selecionado2 = selecionados[i + 1].getCromossomo()
+      const pai1 = selecionados[i].getCromossomo()
+      const pai2 = selecionados[i + 1].getCromossomo()
 
-      const parte1 = selecionado1.splice(sorteio)
-      const parte2 = selecionado2.splice(sorteio)
+      const parte1 = pai1.splice(sorteio)
+      const parte2 = pai2.splice(sorteio)
 
-      const filho1 = [...selecionado1, ...parte2]
-      const filho2 = [...selecionado2, ...parte1]
+      const filho1 = [...pai1, ...parte2]
+      const filho2 = [...pai2, ...parte1]
 
       populacao.adicionarFilhos(filho1, filho2)
     }
