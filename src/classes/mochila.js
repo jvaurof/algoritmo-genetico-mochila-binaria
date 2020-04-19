@@ -45,7 +45,7 @@ function Mochila() {
   this.definirParada = function (populacao) {
     return populacao.getIndividuos().find(individuo => {
 
-      return individuo.getFitness() == limitePeso
+      return individuo.getPesoTotal(itens) == limitePeso
     });
   }
 }

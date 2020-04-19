@@ -1,9 +1,10 @@
 const Individuo = require('./individuo.js')
+var sleep = require('sleep');
 
 function Populacao() {
   let tamanho
   let individuos = []
-  let geracao = 0
+  let geracao = 1
 
   this.getTamanho = function () {
     return tamanho
@@ -35,18 +36,34 @@ function Populacao() {
     }
   }
 
-  this.calcularFitness = function (mochilaItens) {
+  this.calcularFitness = function (mochila) {
     /*calcular fitness*/
-    individuos.forEach(individuo => {
-      individuo.setFitness(0)
 
-      individuo.getCromossomo().forEach((gene, index) => {
-        if (gene == 1)
-          individuo.setFitness(mochilaItens[index].getPeso() + individuo.getFitness())
-      })
+    let fitness = individuos.length
+
+    individuos.sort((a, b) => {
+      return b.getPesoTotal(mochila.getItens()) - a.getPesoTotal(mochila.getItens())
     })
 
-    /*rankerar fitness*/
+    individuos.forEach(individuo => {
+      individuo.setFitness(0)
+      tx = mochila.getLimitePeso()// * 1.20
+
+      if (individuo.getPesoTotal(mochila.getItens()) <= tx) {
+        individuo.setFitness(fitness * 2)
+        fitness--
+      }
+    })
+
+    fitness = 1
+
+    individuos.forEach(individuo => {
+      if (individuo.getPesoTotal(mochila.getItens()) > tx) {
+        individuo.setFitness(fitness)
+        fitness++
+      }
+    })
+
     individuos.sort((a, b) => {
       return b.getFitness() - a.getFitness()
     })
@@ -62,33 +79,26 @@ function Populacao() {
     individuos.push(individuo)
   }
 
-  this.ajustarPopulacao = function (limitePeso) {
-
-    taxaCorte = limitePeso * 1.20
-
-    i = individuos.filter((individuo) => {
-      return individuo.getFitness() <= taxaCorte
-    })
-    console.log(i.length)
-    if (i.length > tamanho) {
-      i.splice(tamanho)
-      individuos = i
-    }
-    //individuos.splice(tamanho)
+  this.ajustarPopulacao = function () {
+    individuos.splice(tamanho)
   }
 
-  this.exibirPopoulacao = function () {
+  this.exibirPopoulacao = function (x) {
     let cromossomo = []
     let fitness = []
+    let pesoTotal = []
 
     individuos.forEach((individuo, index) => {
       cromossomo[index] = individuo.getCromossomo()
       fitness[index] = individuo.getFitness()
+      pesoTotal[index] = individuo.getPesoTotal(x)
     })
     console.table(cromossomo)
     console.table(fitness)
+    console.table(pesoTotal)
     console.log('geração: ', geracao)
     console.log(' ')
+    // sleep.msleep(500)
   }
 }
 

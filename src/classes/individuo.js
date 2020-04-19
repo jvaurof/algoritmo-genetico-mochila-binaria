@@ -10,6 +10,17 @@ function Individuo() {
     return fitness
   }
 
+  this.getPesoTotal = function (mochilaItens) {
+    let pesoTotal = 0
+
+    cromossomo.forEach((gene, index) => {
+      if (gene == 1)
+        pesoTotal += mochilaItens[index].getPeso()
+    })
+
+    return pesoTotal
+  }
+
   this.setCromossomo = function (c) {
     cromossomo = c
   }
@@ -23,11 +34,12 @@ function Individuo() {
     fitness = f
   }
 
+  /*  setPesototal = function () {
+ 
+   } */
+
   this.inverterGene = function (gene) {
-    if (cromossomo[gene] == 0)
-      cromossomo[gene] = 1
-    else
-      cromossomo[gene] = 0
+    cromossomo[gene] = cromossomo[gene] == 0 ? 1 : 0
   }
 }
 
