@@ -43,10 +43,14 @@ function Mochila() {
   }
 
   this.definirParada = function (populacao) {
-    return populacao.getIndividuos().find(individuo => {
-
+    limiteGeracao = populacao.getGeracao() == populacao.getLimiteGeracoes()
+    lp = populacao.getIndividuos().find(individuo => {
       return individuo.getPesoTotal(itens) == limitePeso
     });
+
+    return populacao.getLimiteGeracoes() == -1 ?
+      new Boolean(lp).valueOf() :
+      limiteGeracao || new Boolean(lp).valueOf()
   }
 }
 

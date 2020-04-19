@@ -11,7 +11,6 @@ function Mutacao(taxa = 5) {
         individuo.inverterGene(gene)
       }
     });
-
   }
 }
 
