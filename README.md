@@ -23,7 +23,19 @@ Instruções para instalação aqui: https://yarnpkg.com/
 
 ## Começando
 
-- Primeiramente deve-se preencher os parâmetros de entrada no arquivo src/main.js
+- Primeiramente é preciso fazer o download do projeto
+```
+ git clone https://github.com/jvaurof/algoritmo-genetico-mochila-binaria.git 
+```
+
+- Baixar as dependências
+
+Este comando é necessário somente uma única vez 
+```
+yarn
+```
+
+- Preencher os parâmetros de entrada no arquivo src/main.js
 
 ![Captura de tela de 2020-04-19 20-17-36](https://user-images.githubusercontent.com/33234056/79702831-fc155200-827d-11ea-944c-6ee0194a57fa.png)
 
@@ -31,11 +43,6 @@ Instruções para instalação aqui: https://yarnpkg.com/
 2. LIMITE_PESO_MOCHILA - capacidade de peso da mochila
 3. TAMANHO_POPULACAO - tamanho da população
 4. LIMITE_GERACOES - quantidade máxima de gerações, caso não informado a quantidade máxima de gerações será infinita
-
-- Baixar as dependências 
-```
-yarn
-```
 
 - Executar o algoritmo
 ```
