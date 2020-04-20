@@ -4,8 +4,5 @@
   "description": "algoritmo genético aplicado ao caso da mochila binária",
   "main": "src/main.js",
   "author": "jvaurof",
-  "license": "MIT",
-  "dependencies": {
-    "sleep": "^6.1.0"
-  }
+  "license": "MIT"
 }

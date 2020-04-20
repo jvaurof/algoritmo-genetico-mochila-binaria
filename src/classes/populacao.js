@@ -1,5 +1,4 @@
 const Individuo = require('./individuo.js')
-var sleep = require('sleep');
 
 function Populacao() {
   let tamanho
@@ -113,7 +112,6 @@ function Populacao() {
     console.table(pesoTotal)
     console.log('geração: ', geracao)
     console.log('\n****************************\n')
-    // sleep.msleep(500)
   }
 
   this.exibirSolucaoEncontrada = function (mochila) {
